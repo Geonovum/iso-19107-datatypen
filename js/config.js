@@ -2,8 +2,8 @@ let respecConfig = {
   useLogo: true,
   useLabel: true,
 
-  // TODO: title is verplicht! Neem hieronder de titel van het document op
-  title: "Geonovum template voor ReSpec",
+  // title is verplicht! 
+  title: "ISO 19107  datatypen",
   //-- specStatus is verplicht! (activeer 1 van de volgende)
   // specStatus: "wv",                 // Werkversie
   //specStatus: "cv",               // Consultatieversie
@@ -25,7 +25,7 @@ let respecConfig = {
   //-- pubDomain is verplicht! (komt in de URL)
   //-- zie: https://geonovum.github.io/handleiding-tooling/ReSpec/#pubdomain
   //-- TODO: vul pubDomain in
-  pubDomain: "3dbv",
+  pubDomain: "iso",
 
   //-- license: voor de geldende gebruiksvoorwaarden. Default is cc-by.
   //license: "cc-by-nd",            // bronvermelding, geen afgeleide werken (default)
@@ -34,14 +34,14 @@ let respecConfig = {
 
   //-- TODO shortName is verplicht! (komt in de URL: kies logische afkorting)
   //-- Regel: shortName mag geen hoofdletters bevatten.
-  shortName: "nl-respec-template",
+  shortName: "iso-19107-datatypen",
   
   //edDraftURI = De URI van de draft version. Deze wordt automatisch afgeleid van de github URI; maar kan hier overschreven worden. 
 	//edDraftURI: ["https://geonovum.github.io", "/", "shortName"],
 
   //-- publishDate is verplicht. Als je werkversie gekozen hebt  dan pakt Respec
   //-- de pushdate maar de publishDate is nog steeds verplicht.
-  publishDate: "2026-02-09",
+  //publishDate: "2026-02-09",
   
   //-- publishVersion is verplicht. Hij mag wel leeg zijn [], maar niet de lege string zijn "".
   publishVersion: [],
@@ -58,7 +58,7 @@ let respecConfig = {
   editors:
     [
       {
-        name: "voornaam achternaam",
+        name: "Wilko Quak",
         company: "Geonovum",
         companyURL: "https://www.geonovum.nl",
       }
@@ -69,15 +69,21 @@ let respecConfig = {
   authors:
     [
       {
-        name: "voornaam achternaam",
+        name: "Paul Janssen",
+        company: "Geonovum",
+        companyURL: "https://www.geonovum.nl",
+      },
+      {
+        name: "Wilko Quak",
         company: "Geonovum",
         companyURL: "https://www.geonovum.nl",
       }
     ],
 
+
   // TODO: Vul de github URL in.
   //neem hier de URL van de github repository op waar het respec document in staat
-  github: "https://github.com/Geonovum/NL-ReSpec-template",
+  github: "https://github.com/Geonovum/iso-19107-datatypen",
 
   // Create PDF and link to file in header (optional):
   // TODO: Change the filename as preferred.

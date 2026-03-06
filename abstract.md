@@ -1,1 +1,1 @@
-TODO: vul in abstract.md een abstract in.
+Dit informatiemodel bevat alle primitieve datatypen uit [[ISO19107]]
