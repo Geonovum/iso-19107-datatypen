@@ -1,1 +1,2 @@
-Dit informatiemodel bevat alle primitieve datatypen uit [[ISO19107]]
+Dit informatiemodel bevat alle primitieve datatypen uit de ISO standaard Geographic Information - Spatial schema \[\[ISO19107]]. Hierin staat het conceptuele model van geometrie-typen. De hierin beschreven samenhang en definities van geometrietypen zijn de basis voor een consistente toepassing daarvan in een digitale omgeving. Voor de ondersteuning van die toepassing is dit een Nederlandse handleiding op dit onderwerp.
+
