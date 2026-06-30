@@ -6,7 +6,7 @@ In deze serie handreikingen wordt een selectie gemaakt voor de door Geonovum geb
 
 Een groepering van primitieve datatypen is naar onderdelen van de basisstandaarden in het genoemde stelsel. Voor elk van deze is een aparte handreiking opgesteld:
 
-> Note:
+> OPMERKING:
 > Onderstaande links zijn nu nog naar werkversies
 >
 
