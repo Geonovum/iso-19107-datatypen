@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="nl"><head>
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta content="text/html; charset=utf-8" http-equiv="content-type">
-<meta name="generator" content="ReSpec 35.8.0">
+<meta name="generator" content="ReSpec 37.0.0">
 <style>
 dfn{cursor:pointer}
 .dfn-panel{position:absolute;z-index:35;min-width:300px;max-width:500px;padding:.5em .75em;margin-top:.6em;font-family:"Helvetica Neue",sans-serif;font-size:small;background:#fff;background:var(--indextable-hover-bg,#fff);color:#000;color:var(--text,#000);box-shadow:0 1em 3em -.4em rgba(0,0,0,.3),0 0 1px 1px rgba(0,0,0,.05);box-shadow:0 1em 3em -.4em var(--tocsidebar-shadow,rgba(0,0,0,.3)),0 0 1px 1px var(--tocsidebar-shadow,rgba(0,0,0,.05));border-radius:2px}
@@ -16,6 +16,7 @@ dfn{cursor:pointer}
 .dfn-panel .marker{padding:.1em;margin-left:.5em;border-radius:.2em;text-align:center;white-space:nowrap;font-size:90%;color:#040b1c}
 .dfn-panel .marker.dfn-exported{background:#d1edfd;box-shadow:0 0 0 .125em #1ca5f940}
 .dfn-panel .marker.idl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
+.dfn-panel .marker.cddl-block{background:#8ccbf2;box-shadow:0 0 0 .125em #0670b161}
 .dfn-panel a:not(:hover){text-decoration:none!important;border-bottom:none!important}
 .dfn-panel a[href]:hover{border-bottom-width:1px}
 .dfn-panel ul{padding:0}
@@ -62,13 +63,17 @@ a.bibref{text-decoration:none}
 .respec-offending-element{background:url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x}
 }
 #references :target{background:#eaf3ff;animation:pop .4s ease-in-out 0s 1}
+@media (prefers-color-scheme:dark){
+#references :target{background:color-mix(in srgb, #eaf3ff 15%, transparent)}
+}
+body:has(input[name=color-scheme][value=dark]:checked) #references :target{background:color-mix(in srgb, #eaf3ff 15%, transparent)}
 cite .bibref{font-style:italic}
 a[href].orcid{padding-left:4px;padding-right:4px}
 a[href].orcid>svg{margin-bottom:-2px}
 ol.tof,ul.tof{list-style:none outside none}
 .caption{margin-top:.5em;font-style:italic}
 #issue-summary>ul{column-count:2}
-#issue-summary li{list-style:none;display:inline-block}
+#issue-summary li{list-style:none}
 details.respec-tests-details{margin-left:1em;display:inline-block;vertical-align:top}
 details.respec-tests-details>*{padding-right:2em}
 details.respec-tests-details[open]{z-index:999999;position:absolute;border:thin solid #cad3e2;border-radius:.3em;background-color:#fff;padding-bottom:.5em}
@@ -77,7 +82,8 @@ details.respec-tests-details>ul{width:100%;margin-top:-.3em}
 details.respec-tests-details>li{padding-left:1em}
 .self-link:hover{opacity:1;text-decoration:none;background-color:transparent}
 aside.example .marker>a.self-link{color:inherit}
-.header-wrapper{display:flex;align-items:baseline;position:relative;left:-.5em}
+.header-wrapper{display:flex;align-items:baseline}
+:is(h2,h3,h4,h5,h6):not(#toc>h2,#abstract>h2,#sotd>h2,.head>h2):has(+a.self-link){position:relative;left:-.5em}
 :is(h2,h3,h4,h5,h6):not(#toch2)+a.self-link{color:inherit;order:-1;position:relative;left:-.7em;font-size:1rem;opacity:.5}
 :is(h2,h3,h4,h5,h6)+a.self-link::before{content:"§";text-decoration:none;color:var(--heading-text)}
 :is(h2,h3)+a.self-link{top:-.2em}
@@ -88,23 +94,59 @@ dd{margin-left:0}
 @media print{
 .removeOnSave{display:none}
 }
+body:has(input[name=color-scheme][value=light]:checked),head:not(:has(meta[name=color-scheme][content~=dark]))+body{color-scheme:light}
+body:has(input[name=color-scheme][value=dark]:checked){color-scheme:dark}
 </style>
 <style id="respec-nlgov">
 img.license{float:left;padding-right:5px;background:0 0}
 </style>
 <meta name="color-scheme" content="light">
-<style>
-ul.index{columns:30ch;column-gap:1.5em}
-ul.index li{list-style:inherit}
-ul.index li span{color:inherit;cursor:pointer;white-space:normal}
-#index-defined-here ul.index li{font-size:.9rem}
-ul.index code{color:inherit}
-#index-defined-here .print-only{display:none}
-@media print{
-#index-defined-here .print-only{display:initial}
-}
-</style>
 <meta name="description" content="Dit informatiemodel bevat alle primitieve datatypen uit de ISO standaard Geographic Information - Spatial schema [ISO19107]. Hierin staat het conceptuele model van geometrie-typen. De hierin beschreven samenhang en definities van geometrietypen zijn de basis voor een consistente toepassing daarvan in een digitale omgeving. Voor de ondersteuning van die toepassing is dit een Nederlandse handleiding op dit onderwerp.">
+<style>
+.hljs,body:has(input[name=color-scheme][value=light]:checked) .hljs,head:not(:has(meta[name=color-scheme][content~=dark]))+body .hljs{--base:#fafafa;--mono-1:#383a42;--mono-2:#686b77;--mono-3:#717277;--hue-1:#0b76c5;--hue-2:#336ae3;--hue-3:#a626a4;--hue-4:#42803c;--hue-5:#ca4706;--hue-5-2:#c91243;--hue-6:#986801;--hue-6-2:#9a6a01}
+@media (prefers-color-scheme:dark){
+.hljs{
+  --base: #282c34;
+  --mono-1: #abb2bf;
+  --mono-2: #818896;
+  --mono-3: #5c6370;
+  --hue-1: #56b6c2;
+  --hue-2: #61aeee;
+  --hue-3: #c678dd;
+  --hue-4: #98c379;
+  --hue-5: #e06c75;
+  --hue-5-2: #be5046;
+  --hue-6: #d19a66;
+  --hue-6-2: #e6c07b;
+}
+}
+body:has(input[name=color-scheme][value=dark]:checked) .hljs{
+  --base: #282c34;
+  --mono-1: #abb2bf;
+  --mono-2: #818896;
+  --mono-3: #5c6370;
+  --hue-1: #56b6c2;
+  --hue-2: #61aeee;
+  --hue-3: #c678dd;
+  --hue-4: #98c379;
+  --hue-5: #e06c75;
+  --hue-5-2: #be5046;
+  --hue-6: #d19a66;
+  --hue-6-2: #e6c07b;
+}
+.hljs{display:block;overflow-x:auto;padding:.5em;color:#383a42;color:var(--mono-1,#383a42);background:#fafafa;background:var(--base,#fafafa)}
+.hljs-comment,.hljs-quote{color:#717277;color:var(--mono-3,#717277);font-style:italic}
+.hljs-doctag,.hljs-formula,.hljs-keyword{color:#a626a4;color:var(--hue-3,#a626a4)}
+.hljs-deletion,.hljs-name,.hljs-section,.hljs-selector-tag,.hljs-subst{color:#ca4706;color:var(--hue-5,#ca4706);font-weight:700}
+.hljs-literal{color:#0b76c5;color:var(--hue-1,#0b76c5)}
+.hljs-addition,.hljs-attribute,.hljs-meta-string,.hljs-regexp,.hljs-string{color:#42803c;color:var(--hue-4,#42803c)}
+.hljs-built_in,.hljs-class .hljs-title{color:#9a6a01;color:var(--hue-6-2,#9a6a01)}
+.hljs-attr,.hljs-number,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-pseudo,.hljs-template-variable,.hljs-type,.hljs-variable{color:#986801;color:var(--hue-6,#986801)}
+.hljs-bullet,.hljs-link,.hljs-meta,.hljs-selector-id,.hljs-symbol,.hljs-title{color:#336ae3;color:var(--hue-2,#336ae3)}
+.hljs-emphasis{font-style:italic}
+.hljs-strong{font-weight:700}
+.hljs-link{text-decoration:underline}
+</style>
 <style>
 
   .sidelabel {
@@ -1358,14 +1400,14 @@ ul.index code{color:inherit}
 }</script>
 <link rel="stylesheet" href="https://tools.geostandaarden.nl/respec/style/base.css"></head>
 
-<body class="h-entry toc-inline"><div class="head">
+<body class="h-entry informative"><div class="head">
     <a class="logo" href="https://www.geonovum.nl/geo-standaarden"><img alt="Geonovum" height="67" id="Geonovum" src="https://docs.geostandaarden.nl/media/Geonovum.svg" width="132">
   </a> <h1 id="title" class="title">ISO 19107 datatypen</h1>
     
     <h2>
       Geonovum Handreiking<br>
       Document
-      <time class="dt-published" datetime="2026-05-26">26 mei 2026</time>
+      <time class="dt-published" datetime="2026-06-30">30 juni 2026</time>
     </h2>
     <dl>
       
@@ -1389,7 +1431,9 @@ ul.index code{color:inherit}
       <dt>Doe mee:</dt><dd>
     <a href="https://github.com/Geonovum/iso-19107-datatypen/">GitHub Geonovum/iso-19107-datatypen</a>
   </dd><dd>
-    <a href="https://github.com/Geonovum/iso-19107-datatypen/issues/">Dien een melding in</a>
+    <a href="https://github.com/Geonovum/iso-19107-datatypen/issues/">All issues</a>
+  </dd><dd>
+    <a href="https://github.com/Geonovum/iso-19107-datatypen/issues/new/choose">Dien een melding in</a>
   </dd><dd>
     <a href="https://github.com/Geonovum/iso-19107-datatypen/commits/">Revisiehistorie</a>
   </dd><dd>
@@ -1408,12 +1452,12 @@ ul.index code{color:inherit}
 
 <section id="abstract" class="introductory"><h2>Samenvatting</h2><p>Dit informatiemodel bevat alle primitieve datatypen uit de ISO standaard Geographic Information - Spatial schema [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso19107" title="ISO 19107:2019 Geographic information — Spatial schema">ISO19107</a></cite>]. Hierin staat het conceptuele model van geometrie-typen. De hierin beschreven samenhang en definities van geometrietypen zijn de basis voor een consistente toepassing daarvan in een digitale omgeving. Voor de ondersteuning van die toepassing is dit een Nederlandse handleiding op dit onderwerp.</p>
 </section>
-<section id="sotd" class="introductory"><h2>Status van dit document</h2><p>Dit is een document zonder officiële status.</p></section><nav id="toc"><h2 class="introductory" id="inhoudsopgave">Inhoudsopgave</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Samenvatting</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status van dit document</a></li><li class="tocline"><a class="tocxref" href="#inleiding"><bdi class="secno">1. </bdi>Inleiding</a></li><li class="tocline"><a class="tocxref" href="#toepassingsgebied"><bdi class="secno">2. </bdi>Toepassingsgebied</a></li><li class="tocline"><a class="tocxref" href="#informele-beschrijving"><bdi class="secno">3. </bdi>Informele beschrijving</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#iso-19107-geographic-information-spatial-schema"><bdi class="secno">3.1 </bdi>ISO 19107 Geographic Information - Spatial schema.</a></li></ol></li><li class="tocline"><a class="tocxref" href="#cat"><bdi class="secno">4. </bdi>Gegevensdefinitie</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818"><bdi class="secno">4.1 </bdi>   ISO 19107:2003 Spatial schema: basismodel - overzicht</a></li><li class="tocline"><a class="tocxref" href="#primitieve-datatypen"><bdi class="secno">4.2 </bdi>Primitieve datatypen   </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CompositeSolid"><bdi class="secno">4.2.1 </bdi>Primitief datatype   GM_Composite­Solid</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Curve"><bdi class="secno">4.2.2 </bdi>Primitief datatype   GM_Curve</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_PointArray"><bdi class="secno">4.2.3 </bdi>Primitief datatype   GM_Point­Array</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Polygon"><bdi class="secno">4.2.4 </bdi>Primitief datatype   GM_Polygon</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiSurface"><bdi class="secno">4.2.5 </bdi>Primitief datatype   GM_Multi­Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_ArcString"><bdi class="secno">4.2.6 </bdi>Primitief datatype   GM_Arc­String</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_GenericSurface"><bdi class="secno">4.2.7 </bdi>Primitief datatype   GM_Generic­Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Geometry"><bdi class="secno">4.2.8 </bdi>Primitief datatype   GM_Geometry</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CompositeSurface"><bdi class="secno">4.2.9 </bdi>Primitief datatype   GM_Composite­Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Solid"><bdi class="secno">4.2.10 </bdi>Primitief datatype   GM_Solid</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CompositePoint"><bdi class="secno">4.2.11 </bdi>Primitief datatype   GM_Composite­Point</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiPrimitive"><bdi class="secno">4.2.12 </bdi>Primitief datatype   GM_Multi­Primitive</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Composite"><bdi class="secno">4.2.13 </bdi>Primitief datatype   GM_Composite</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Aggregate"><bdi class="secno">4.2.14 </bdi>Primitief datatype   GM_Aggregate</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Primitive"><bdi class="secno">4.2.15 </bdi>Primitief datatype   GM_Primitive</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_OrientableSurface"><bdi class="secno">4.2.16 </bdi>Primitief datatype   GM_Orientable­Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiPoint"><bdi class="secno">4.2.17 </bdi>Primitief datatype   GM_Multi­Point</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Complex"><bdi class="secno">4.2.18 </bdi>Primitief datatype   GM_Complex</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiCurve"><bdi class="secno">4.2.19 </bdi>Primitief datatype   GM_Multi­Curve</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_LineString"><bdi class="secno">4.2.20 </bdi>Primitief datatype   GM_Line­String</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_SurfacePatch"><bdi class="secno">4.2.21 </bdi>Primitief datatype   GM_Surface­Patch</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_OrientablePrimitive"><bdi class="secno">4.2.22 </bdi>Primitief datatype   GM_Orientable­Primitive</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_OrientableCurve"><bdi class="secno">4.2.23 </bdi>Primitief datatype   GM_Orientable­Curve</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Point"><bdi class="secno">4.2.24 </bdi>Primitief datatype   GM_Point</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CurveSegment"><bdi class="secno">4.2.25 </bdi>Primitief datatype   GM_Curve­Segment</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Position"><bdi class="secno">4.2.26 </bdi>Primitief datatype   GM_Position</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Surface"><bdi class="secno">4.2.27 </bdi>Primitief datatype   GM_Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CompositeCurve"><bdi class="secno">4.2.28 </bdi>Primitief datatype   GM_Composite­Curve</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiSolid"><bdi class="secno">4.2.29 </bdi>Primitief datatype   GM_Multi­Solid</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Object"><bdi class="secno">4.2.30 </bdi>Primitief datatype   GM_Object</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#conformance"><bdi class="secno">5. </bdi>Conformiteit</a></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>Referenties</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#normatieve-referenties"><bdi class="secno">A.1 </bdi>Normatieve referenties</a></li></ol></li></ol></nav>
+<section id="sotd" class="introductory"><h2>Status van dit document</h2><p>Dit is een document zonder officiële status.</p></section><nav id="toc"><h2 class="introductory" id="inhoudsopgave">Inhoudsopgave</h2><ol class="toc"><li class="tocline"><a class="tocxref" href="#abstract">Samenvatting</a></li><li class="tocline"><a class="tocxref" href="#sotd">Status van dit document</a></li><li class="tocline"><a class="tocxref" href="#inleiding"><bdi class="secno">1. </bdi>Inleiding</a></li><li class="tocline"><a class="tocxref" href="#toepassingsgebied"><bdi class="secno">2. </bdi>Toepassingsgebied</a></li><li class="tocline"><a class="tocxref" href="#informele-beschrijving"><bdi class="secno">3. </bdi>Informele beschrijving</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#iso-19107-geographic-information-spatial-schema"><bdi class="secno">3.1 </bdi>ISO 19107 Geographic Information - Spatial schema.</a></li></ol></li><li class="tocline"><a class="tocxref" href="#cat"><bdi class="secno">4. </bdi>Gegevensdefinitie</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818"><bdi class="secno">4.1 </bdi>   ISO 19107:2003 Spatial schema: basismodel - overzicht</a></li><li class="tocline"><a class="tocxref" href="#primitieve-datatypen"><bdi class="secno">4.2 </bdi>Primitieve datatypen   </a><ol class="toc"><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CompositeSolid"><bdi class="secno">4.2.1 </bdi>Primitief datatype   GM_Composite­Solid</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Curve"><bdi class="secno">4.2.2 </bdi>Primitief datatype   GM_Curve</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_PointArray"><bdi class="secno">4.2.3 </bdi>Primitief datatype   GM_Point­Array</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Polygon"><bdi class="secno">4.2.4 </bdi>Primitief datatype   GM_Polygon</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiSurface"><bdi class="secno">4.2.5 </bdi>Primitief datatype   GM_Multi­Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_ArcString"><bdi class="secno">4.2.6 </bdi>Primitief datatype   GM_Arc­String</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_GenericSurface"><bdi class="secno">4.2.7 </bdi>Primitief datatype   GM_Generic­Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CompositeSurface"><bdi class="secno">4.2.8 </bdi>Primitief datatype   GM_Composite­Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Solid"><bdi class="secno">4.2.9 </bdi>Primitief datatype   GM_Solid</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CompositePoint"><bdi class="secno">4.2.10 </bdi>Primitief datatype   GM_Composite­Point</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiPrimitive"><bdi class="secno">4.2.11 </bdi>Primitief datatype   GM_Multi­Primitive</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Composite"><bdi class="secno">4.2.12 </bdi>Primitief datatype   GM_Composite</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Aggregate"><bdi class="secno">4.2.13 </bdi>Primitief datatype   GM_Aggregate</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Primitive"><bdi class="secno">4.2.14 </bdi>Primitief datatype   GM_Primitive</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_OrientableSurface"><bdi class="secno">4.2.15 </bdi>Primitief datatype   GM_Orientable­Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiPoint"><bdi class="secno">4.2.16 </bdi>Primitief datatype   GM_Multi­Point</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Complex"><bdi class="secno">4.2.17 </bdi>Primitief datatype   GM_Complex</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiCurve"><bdi class="secno">4.2.18 </bdi>Primitief datatype   GM_Multi­Curve</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_LineString"><bdi class="secno">4.2.19 </bdi>Primitief datatype   GM_Line­String</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_SurfacePatch"><bdi class="secno">4.2.20 </bdi>Primitief datatype   GM_Surface­Patch</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_OrientablePrimitive"><bdi class="secno">4.2.21 </bdi>Primitief datatype   GM_Orientable­Primitive</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_OrientableCurve"><bdi class="secno">4.2.22 </bdi>Primitief datatype   GM_Orientable­Curve</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Point"><bdi class="secno">4.2.23 </bdi>Primitief datatype   GM_Point</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CurveSegment"><bdi class="secno">4.2.24 </bdi>Primitief datatype   GM_Curve­Segment</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Position"><bdi class="secno">4.2.25 </bdi>Primitief datatype   GM_Position</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Surface"><bdi class="secno">4.2.26 </bdi>Primitief datatype   GM_Surface</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_CompositeCurve"><bdi class="secno">4.2.27 </bdi>Primitief datatype   GM_Composite­Curve</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_MultiSolid"><bdi class="secno">4.2.28 </bdi>Primitief datatype   GM_Multi­Solid</a></li><li class="tocline"><a class="tocxref" href="#global_class_ISO191072003Spatialschema_GM_Object"><bdi class="secno">4.2.29 </bdi>Primitief datatype   GM_Object</a></li></ol></li></ol></li><li class="tocline"><a class="tocxref" href="#references"><bdi class="secno">A. </bdi>Referenties</a><ol class="toc"><li class="tocline"><a class="tocxref" href="#informatieve-referenties"><bdi class="secno">A.1 </bdi>Informatieve referenties</a></li></ol></li></ol></nav>
 
 
 <section id="inleiding"><div class="header-wrapper"><h2 id="x1-inleiding"><bdi class="secno">1. </bdi>Inleiding</h2><a class="self-link" href="#inleiding" aria-label="Permalink for Section 1."></a></div>
-<p>Deze hanreiking is onderdeel van een serie over primitieve datatypen die in informatiemodellen van Geonovum worden gebruikt. Informatiemodellen beschrijven de informatieinhoud en -structuur van domeinen en definieren de semantiek die in domeinen wordt gebruikt. Primitieve datatypen worden gebruikt om waardetypen van attributen te specificeren. Een primitief datatypen is buiten een informatiemodel gespecificeert en wordt alleen gebruikt conform de daarvoor geldende specificaties. Het is primitief omdat het een eenheid is die een verder ondeelbare waarde specificeert. Voor deze primitieve datatypen zijn er in het algemeen internationale standaarden opgesteld. Voorbeelden zijn 'CharacterString', 'Integer', 'Date', 'GM_Point', 'Boolean'.</p>
-<p>In deze serie handreikingen wordt een selectie gemaakt voor de door Geonovum gebruikte primitieve datatypen en worden deze gespecificeert naar aspecten die opname in het stelsel van geo-informatiemodellen ondersteund.</p>
+<p>Deze handreiking is onderdeel van een serie over primitieve datatypen die in informatiemodellen van Geonovum worden gebruikt. Informatiemodellen beschrijven de informatieinhoud en -structuur van domeinen en definieren de semantiek die in domeinen wordt gebruikt. Primitieve datatypen worden gebruikt om waardetypen van attributen te specificeren. Een primitief datatypen is buiten een informatiemodel gespecificeert en wordt alleen gebruikt conform de daarvoor geldende specificaties. Het is primitief omdat het een eenheid is die een verder ondeelbare waarde specificeert. Voor deze primitieve datatypen zijn er in het algemeen internationale standaarden opgesteld. Voorbeelden zijn 'CharacterString', 'Integer', 'Date', 'GM_Point', 'Boolean'.</p>
+<p>In deze serie handreikingen wordt een selectie gemaakt voor de door Geonovum gebruikte primitieve datatypen en worden deze gespecificeerd naar aspecten die opname in het stelsel van geo-informatiemodellen ondersteund.</p>
 <p>Een groepering van primitieve datatypen is naar onderdelen van de basisstandaarden in het genoemde stelsel. Voor elk van deze is een aparte handreiking opgesteld:</p>
 <blockquote>
 <p>Note:
@@ -1450,10 +1494,23 @@ Onderstaande links zijn nu nog naar werkversies</p>
 </ul>
 <p>In deze handreikingen worden de primitieve datatypen in een MIM 1.2 conform conceptueel informatiemodel gespecificeerd. Tevens wordt er een [<cite><a class="bibref" data-link-type="biblio" href="#bib-nl-sbb-20241010" title="NNL-SBB - Standaard voor het beschrijven van begrippen">NL-SBB-20241010</a></cite>] conform begrippenmodel gepubliceerd.</p>
 <section id="iso-19107-geographic-information-spatial-schema"><div class="header-wrapper"><h3 id="x3-1-iso-19107-geographic-information-spatial-schema"><bdi class="secno">3.1 </bdi>ISO 19107 Geographic Information - Spatial schema.</h3><a class="self-link" href="#iso-19107-geographic-information-spatial-schema" aria-label="Permalink for Section 3.1"></a></div>
-<p>De ISO standaard Geographic Information - Spatial schema [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso19107" title="ISO 19107:2019 Geographic information — Spatial schema">ISO19107</a></cite>] beschrijft het conceptuele model van geometrien. Voorbeelden hiervan zijn punt, lijn, vlak, 3D volumes en ook combinaties hiervan. Onderdeel van de specificaties is onder andere ook de wis- en meetkundige definities hiervan, orientatie in relatie tot onder- en bovenkant, richting van coordinaatreeksen. Al deze specificaties zijn nodig om een eenduidig begrip te hebben en interoperable implementaties te krijgen in technische formaten.</p>
-<p>De ISO 19109 is er in verschillende versies, een 2003 versie een een 2019 versie. De 2019 versie is een uitbreiding en op onderdelen een verbeterde versie van de 2003 versie. Ze maakt ook een beter onderscheid tussen een conceptueel niveau met interfaces een toepassing daarvan in datatypen. Toch wordt er voor de handreiking gewerkt met de 2003 versie omdat deze in de toepassing wijder verbreidt is, in zichzelf een toepassing van de 2019 versie is en eenvoudiger inj gebruik is. De 2019 versie is backwards compatible met de 2003 versie.</p>
-<p>"Dit document specificeert conceptuele modellen voor het beschrijven van de ruimtelijke kenmerken van geografische entiteiten, en een reeks ruimtelijke bewerkingen die consistent zijn met deze modellen. Het behandelt "vector"-geometrie en -topologie. Het definieert standaard ruimtelijke bewerkingen voor gebruik bij toegang tot, opvraging, beheer, verwerking en gegevensuitwisseling van geografische informatie voor ruimtelijke (geometrische en topologische) objecten. Vanwege de aard van geografische informatie zullen deze geometrische coördinatenstelsels normaal gesproken maximaal drie ruimtelijke dimensies, één temporele dimensie en een willekeurig aantal andere ruimtelijk afhankelijke parameters hebben, afhankelijk van de behoeften van de toepassingen. Over het algemeen zal de topologische dimensie van de ruimtelijke projecties van de geometrische objecten maximaal drie zijn. "</p>
-<p>Dit informatiemodel bevat  primitieve datatypen die intern bij Geonovum worden gebruikt.</p>
+<p>De ISO standaard Geographic Information - Spatial schema [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso19107" title="ISO 19107:2019 Geographic information — Spatial schema">ISO19107</a></cite>] beschrijft het conceptuele model van geometrieën. Voorbeelden hiervan zijn punt, lijn, vlak, 3D volumes en ook combinaties hiervan. Onderdeel van de specificaties is onder andere ook de wis- en meetkundige definities hiervan, oriëntatie in relatie tot onder- en bovenkant, richting van coördinaatreeksen. Al deze specificaties zijn nodig om een eenduidig begrip te hebben en interoperable implementaties te krijgen in technische formaten. Deze handreiking gaat niet tot dat detail maar bevat slechts het overzicht van de geometrietypen en een aantal van de onderlinge relaties en is daarmee een referentie naar de ISO standaard. In de ISO 19107 zijn voor de geomtrietypen geen talige definities opgenomen maar in veel gevallen wel een beschrijving. In deze handreiking is van die omschrijvingen een definitie gemaakt. Deze moet geplaatst worden in de context van de ISO 19107.</p>
+<pre><code aria-busy="false" class="hljs yaml"><span class="hljs-string">Een</span> <span class="hljs-string">voorbeeld</span>
+
+<span class="hljs-string">Het</span> <span class="hljs-string">geometrietype</span> <span class="hljs-string">GM_Polygon</span>
+<span class="hljs-attr">In ISO 19107:</span>
+<span class="hljs-number">6.4</span><span class="hljs-number">.36</span> <span class="hljs-string">GM_Polygon</span>
+<span class="hljs-number">6.4</span><span class="hljs-number">.36</span><span class="hljs-number">.1</span> <span class="hljs-string">Semantics</span>
+<span class="hljs-string">A</span> <span class="hljs-string">GM_Polygon</span> <span class="hljs-string">(Figure</span> <span class="hljs-number">21</span><span class="hljs-string">)</span> <span class="hljs-string">is</span> <span class="hljs-string">a</span> <span class="hljs-string">surface</span> <span class="hljs-string">patch</span> <span class="hljs-string">that</span> <span class="hljs-string">is</span> <span class="hljs-string">defined</span> <span class="hljs-string">by</span> <span class="hljs-string">a</span> <span class="hljs-string">set</span> <span class="hljs-string">of</span> <span class="hljs-string">boundary</span> <span class="hljs-string">curves</span> <span class="hljs-string">and</span> <span class="hljs-string">an</span> <span class="hljs-string">underlying</span>
+<span class="hljs-string">surface</span> <span class="hljs-string">to</span> <span class="hljs-string">which</span> <span class="hljs-string">these</span> <span class="hljs-string">curves</span> <span class="hljs-string">adhere.</span> <span class="hljs-string">The</span> <span class="hljs-string">default</span> <span class="hljs-string">is</span> <span class="hljs-string">that</span> <span class="hljs-string">the</span> <span class="hljs-string">curves</span> <span class="hljs-string">are</span> <span class="hljs-string">coplanar</span> <span class="hljs-string">and</span> <span class="hljs-string">the</span> <span class="hljs-string">polygon</span> <span class="hljs-string">uses</span> <span class="hljs-string">planar</span>
+<span class="hljs-string">interpolation</span> <span class="hljs-string">in</span> <span class="hljs-string">its</span> <span class="hljs-string">interior</span>
+
+<span class="hljs-attr">In deze handreiking:</span>
+<span class="hljs-string">GM_Polygon</span>
+<span class="hljs-attr">Definitie:</span> <span class="hljs-string">Een</span> <span class="hljs-string">homogeen</span> <span class="hljs-string">deel</span> <span class="hljs-string">(surface</span> <span class="hljs-string">patch)</span> <span class="hljs-string">van</span> <span class="hljs-string">een</span> <span class="hljs-string">vlak</span> <span class="hljs-string">gedefinieerd</span> <span class="hljs-string">door</span> <span class="hljs-string">een</span> <span class="hljs-string">set</span> <span class="hljs-string">van</span> <span class="hljs-string">grenscurves</span> <span class="hljs-string">en</span> <span class="hljs-string">het</span> <span class="hljs-string">vlak</span> <span class="hljs-string">waartoe</span> <span class="hljs-string">het</span> <span class="hljs-string">behoort.</span>
+<span class="hljs-attr">Toelichting:</span> <span class="hljs-string">Een</span> <span class="hljs-string">GM_Polygon</span> <span class="hljs-string">is</span> <span class="hljs-string">een</span> <span class="hljs-string">GM_Surface­Patch</span>
+</code></pre>
+<p>De ISO 19107 is er in verschillende versies, een 2003 versie een een 2019 versie. De 2019 versie is een uitbreiding en op onderdelen een verbeterde versie van de 2003 versie. Ze maakt ook een beter onderscheid tussen een conceptueel niveau met interfaces een toepassing daarvan in datatypen. Toch wordt er voor de handreiking gewerkt met de 2003 versie omdat deze in de toepassing wijder verbreidt is, in zichzelf een toepassing van de 2019 versie is en eenvoudiger in gebruik is. De 2019 versie is backwards compatible met de 2003 versie.</p>
 </section></section>
 
  
@@ -1461,11 +1518,11 @@ Onderstaande links zijn nu nog naar werkversies</p>
 
 
 
-<section id="cat" class="normative"><div class="header-wrapper"><h2 id="x4-gegevensdefinitie"><bdi class="secno">4. </bdi>Gegevensdefinitie</h2><a class="self-link" href="#cat" aria-label="Permalink for Section 4."></a></div><section id="EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818"><div class="header-wrapper"><h3 id="x4-1-iso-19107-2003-spatial-schema-basismodel-overzicht"><bdi class="secno">4.1 </bdi>   ISO 19107:2003 Spatial schema: basismodel - overzicht</h3><a class="self-link" href="#EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818" aria-label="Permalink for Section 4.1"></a></div><div class="imageinfo overview"><figure class="uml-diagram" id="fig-diagram-iso-19107-2003-spatial-schema-basismodel"><img id="EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818" src="data/Images/EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818.png" usemap="#imagemap-EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818" alt="Diagram: Geometrie model (spatial schema) van ISO 19107:2003 - Spatial schema. Bevat alleen het model van de basisklassen en generalisatie relaties. Voor alle details wordt verwezen naar de ISO 19107:2003 - Spatial schema. Opmerking: De ISO 19107:2019 - Spatial schema is een update van de 2003 versie maar die wordt nog weinig gebruikt. De 2003 versie wordt gezien als een valide topassing van de 2019 versie."><figcaption><a class="self-link" href="#fig-diagram-iso-19107-2003-spatial-schema-basismodel">Figuur <bdi class="figno">1</bdi></a> <span class="fig-title"> ‒ Diagram: ISO 19107:2003 Spatial schema: basismodel</span></figcaption></figure><map name="imagemap-EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818"><area shape="rect" alt="GM_SurfacePatch" coords="371,1487,587,1543" href="#global_class_ISO191072003Spatialschema_GM_SurfacePatch"><area shape="rect" alt="GM_GenericSurface" coords="315,1364,531,1420" href="#global_class_ISO191072003Spatialschema_GM_GenericSurface"><area shape="rect" alt="GM_CurveSegment" coords="48,1267,264,1323" href="#global_class_ISO191072003Spatialschema_GM_CurveSegment"><area shape="rect" alt="GM_Polygon" coords="371,1635,587,1691" href="#global_class_ISO191072003Spatialschema_GM_Polygon"><area shape="rect" alt="GM_Geometry" coords="915,1487,1131,1543" href="#global_class_ISO191072003Spatialschema_GM_Geometry"><area shape="rect" alt="GM_PointArray" coords="624,1487,840,1543" href="#global_class_ISO191072003Spatialschema_GM_PointArray"><area shape="rect" alt="GM_Position" coords="1200,1487,1416,1543" href="#global_class_ISO191072003Spatialschema_GM_Position"><area shape="rect" alt="GM_LineString" coords="49,1487,265,1543" href="#global_class_ISO191072003Spatialschema_GM_LineString"><area shape="rect" alt="GM_ArcString" coords="171,1568,387,1624" href="#global_class_ISO191072003Spatialschema_GM_ArcString"><area shape="rect" alt="GM_MultiCurve" coords="1100,840,1316,896" href="#global_class_ISO191072003Spatialschema_GM_MultiCurve"><area shape="rect" alt="GM_MultiSurface" coords="1172,959,1389,1015" href="#global_class_ISO191072003Spatialschema_GM_MultiSurface"><area shape="rect" alt="GM_MultiSolid" coords="1231,1281,1447,1337" href="#global_class_ISO191072003Spatialschema_GM_MultiSolid"><area shape="rect" alt="GM_MultiPoint" coords="915,566,1131,622" href="#global_class_ISO191072003Spatialschema_GM_MultiPoint"><area shape="rect" alt="GM_CompositeSolid" coords="731,1281,947,1337" href="#global_class_ISO191072003Spatialschema_GM_CompositeSolid"><area shape="rect" alt="GM_CompositeSurface" coords="635,960,851,1016" href="#global_class_ISO191072003Spatialschema_GM_CompositeSurface"><area shape="rect" alt="GM_CompositeCurve" coords="486,840,702,896" href="#global_class_ISO191072003Spatialschema_GM_CompositeCurve"><area shape="rect" alt="GM_CompositePoint" coords="569,568,785,624" href="#global_class_ISO191072003Spatialschema_GM_CompositePoint"><area shape="rect" alt="GM_Curve" coords="48,1064,264,1120" href="#global_class_ISO191072003Spatialschema_GM_Curve"><area shape="rect" alt="GM_MultiPrimitive" coords="1056,382,1272,438" href="#global_class_ISO191072003Spatialschema_GM_MultiPrimitive"><area shape="rect" alt="GM_Aggregate" coords="1056,254,1272,311" href="#global_class_ISO191072003Spatialschema_GM_Aggregate"><area shape="rect" alt="GM_Composite" coords="561,382,777,438" href="#global_class_ISO191072003Spatialschema_GM_Composite"><area shape="rect" alt="GM_Complex" coords="562,254,778,311" href="#global_class_ISO191072003Spatialschema_GM_Complex"><area shape="rect" alt="GM_Solid" coords="434,1281,650,1337" href="#global_class_ISO191072003Spatialschema_GM_Solid"><area shape="rect" alt="GM_Surface" coords="211,1189,427,1245" href="#global_class_ISO191072003Spatialschema_GM_Surface"><area shape="rect" alt="GM_OrientableSurface" coords="211,960,427,1016" href="#global_class_ISO191072003Spatialschema_GM_OrientableSurface"><area shape="rect" alt="GM_OrientableCurve" coords="49,840,265,896" href="#global_class_ISO191072003Spatialschema_GM_OrientableCurve"><area shape="rect" alt="GM_OrientablePrimitive" coords="211,694,427,750" href="#global_class_ISO191072003Spatialschema_GM_OrientablePrimitive"><area shape="rect" alt="GM_Point" coords="49,568,265,624" href="#global_class_ISO191072003Spatialschema_GM_Point"><area shape="rect" alt="GM_Primitive" coords="103,382,319,438" href="#global_class_ISO191072003Spatialschema_GM_Primitive"><area shape="rect" alt="GM_Object" coords="550,68,766,125" href="#global_class_ISO191072003Spatialschema_GM_Object"></map><p>
-                        </p><p>Geometrie model (spatial schema) van ISO 19107:2003 - Spatial schema. Bevat alleen het model van de basisklassen en generalisatie relaties. Voor alle details wordt verwezen naar de ISO 19107:2003 - Spatial schema.</p>
+<section id="cat" class="normative"><div class="header-wrapper"><h2 id="x4-gegevensdefinitie"><bdi class="secno">4. </bdi>Gegevensdefinitie</h2><a class="self-link" href="#cat" aria-label="Permalink for Section 4."></a></div><section id="EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818"><div class="header-wrapper"><h3 id="x4-1-iso-19107-2003-spatial-schema-basismodel-overzicht"><bdi class="secno">4.1 </bdi>   ISO 19107:2003 Spatial schema: basismodel - overzicht</h3><a class="self-link" href="#EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818" aria-label="Permalink for Section 4.1"></a></div><div class="imageinfo overview"><figure class="uml-diagram" id="fig-diagram-iso-19107-2003-spatial-schema-basismodel"><img id="EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818" src="data/Images/EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818.png" usemap="#imagemap-EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818" alt="Diagram: Geometriemodel (spatial schema) van ISO 19107:2003 - Spatial schema. Bevat alleen het model van de basisklassen en generalisatierelaties. Voor alle details wordt verwezen naar de ISO 19107:2003 - Spatial schema. Opmerking: De ISO 19107:2019 - Spatial schema is een update van de 2003 versie maar die wordt nog weinig gebruikt. De 2003 versie wordt gezien als een valide toepassing van de 2019 versie."><figcaption><a class="self-link" href="#fig-diagram-iso-19107-2003-spatial-schema-basismodel">Figuur <bdi class="figno">1</bdi></a> <span class="fig-title"> ‒ Diagram: ISO 19107:2003 Spatial schema: basismodel</span></figcaption></figure><map name="imagemap-EAID_578AE2D3_1AFD_4602_9B6A_860A51C14818"><area shape="rect" alt="GM_SurfacePatch" coords="336,1431,552,1487" href="#global_class_ISO191072003Spatialschema_GM_SurfacePatch"><area shape="rect" alt="GM_GenericSurface" coords="280,1308,496,1364" href="#global_class_ISO191072003Spatialschema_GM_GenericSurface"><area shape="rect" alt="GM_CurveSegment" coords="14,1211,230,1267" href="#global_class_ISO191072003Spatialschema_GM_CurveSegment"><area shape="rect" alt="GM_Polygon" coords="336,1579,552,1635" href="#global_class_ISO191072003Spatialschema_GM_Polygon"><area shape="rect" alt="GM_PointArray" coords="589,1431,805,1487" href="#global_class_ISO191072003Spatialschema_GM_PointArray"><area shape="rect" alt="GM_Position" coords="1164,1431,1380,1487" href="#global_class_ISO191072003Spatialschema_GM_Position"><area shape="rect" alt="GM_LineString" coords="15,1431,231,1487" href="#global_class_ISO191072003Spatialschema_GM_LineString"><area shape="rect" alt="GM_ArcString" coords="137,1512,353,1568" href="#global_class_ISO191072003Spatialschema_GM_ArcString"><area shape="rect" alt="GM_MultiCurve" coords="1065,785,1281,841" href="#global_class_ISO191072003Spatialschema_GM_MultiCurve"><area shape="rect" alt="GM_MultiSurface" coords="1137,903,1353,959" href="#global_class_ISO191072003Spatialschema_GM_MultiSurface"><area shape="rect" alt="GM_MultiSolid" coords="1196,1225,1412,1281" href="#global_class_ISO191072003Spatialschema_GM_MultiSolid"><area shape="rect" alt="GM_MultiPoint" coords="880,511,1096,567" href="#global_class_ISO191072003Spatialschema_GM_MultiPoint"><area shape="rect" alt="GM_CompositeSolid" coords="696,1225,912,1281" href="#global_class_ISO191072003Spatialschema_GM_CompositeSolid"><area shape="rect" alt="GM_CompositeSurface" coords="600,905,816,961" href="#global_class_ISO191072003Spatialschema_GM_CompositeSurface"><area shape="rect" alt="GM_CompositeCurve" coords="451,785,667,841" href="#global_class_ISO191072003Spatialschema_GM_CompositeCurve"><area shape="rect" alt="GM_CompositePoint" coords="534,513,750,569" href="#global_class_ISO191072003Spatialschema_GM_CompositePoint"><area shape="rect" alt="GM_Curve" coords="14,1009,230,1065" href="#global_class_ISO191072003Spatialschema_GM_Curve"><area shape="rect" alt="GM_MultiPrimitive" coords="1021,327,1237,383" href="#global_class_ISO191072003Spatialschema_GM_MultiPrimitive"><area shape="rect" alt="GM_Aggregate" coords="1021,200,1237,256" href="#global_class_ISO191072003Spatialschema_GM_Aggregate"><area shape="rect" alt="GM_Composite" coords="526,327,742,383" href="#global_class_ISO191072003Spatialschema_GM_Composite"><area shape="rect" alt="GM_Complex" coords="528,200,744,256" href="#global_class_ISO191072003Spatialschema_GM_Complex"><area shape="rect" alt="GM_Solid" coords="399,1225,615,1281" href="#global_class_ISO191072003Spatialschema_GM_Solid"><area shape="rect" alt="GM_Surface" coords="176,1133,392,1189" href="#global_class_ISO191072003Spatialschema_GM_Surface"><area shape="rect" alt="GM_OrientableSurface" coords="176,905,392,961" href="#global_class_ISO191072003Spatialschema_GM_OrientableSurface"><area shape="rect" alt="GM_OrientableCurve" coords="15,785,231,841" href="#global_class_ISO191072003Spatialschema_GM_OrientableCurve"><area shape="rect" alt="GM_OrientablePrimitive" coords="176,638,392,694" href="#global_class_ISO191072003Spatialschema_GM_OrientablePrimitive"><area shape="rect" alt="GM_Point" coords="15,513,231,569" href="#global_class_ISO191072003Spatialschema_GM_Point"><area shape="rect" alt="GM_Primitive" coords="68,327,284,383" href="#global_class_ISO191072003Spatialschema_GM_Primitive"><area shape="rect" alt="GM_Object" coords="515,14,731,70" href="#global_class_ISO191072003Spatialschema_GM_Object"></map><p>
+                        </p><p>Geometriemodel (spatial schema) van ISO 19107:2003 - Spatial schema. Bevat alleen het model van de basisklassen en generalisatierelaties. Voor alle details wordt verwezen naar de ISO 19107:2003 - Spatial schema.</p>
                         <p></p>
                         <p>Opmerking:</p>
-                        <p>De ISO 19107:2019 - Spatial schema is een update van de 2003 versie maar die wordt nog weinig gebruikt. De 2003 versie wordt gezien als een valide topassing van de 2019 versie.</p>
+                        <p>De ISO 19107:2019 - Spatial schema is een update van de 2003 versie maar die wordt nog weinig gebruikt. De 2003 versie wordt gezien als een valide toepassing van de 2019 versie.</p>
                      <p></p></div></section><section id="primitieve-datatypen"><div class="header-wrapper"><h3 id="x4-2-primitieve-datatypen"><bdi class="secno">4.2 </bdi>Primitieve datatypen   </h3><a class="self-link" href="#primitieve-datatypen" aria-label="Permalink for Section 4.2"></a></div>
             <section id="global_class_ISO191072003Spatialschema_GM_CompositeSolid"><div class="header-wrapper"><h4 id="x4-2-1-primitief-datatype-gm_composite-solid"><bdi class="secno">4.2.1 </bdi>Primitief datatype   GM_Composite­Solid</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositeSolid" aria-label="Permalink for Section 4.2.1"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Composite­Solid</td></tr><tr><th scope="row">Herkomst</th><td>
@@ -1474,7 +1531,9 @@ Onderstaande links zijn nu nog naar werkversies</p>
                         
                               <p>Een set van aaneengesloten solids die samen een solid vormen en die elkaar niet overlapen.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
                <div class="header-wrapper"><h5 id="overzicht-relaties">Overzicht relaties  </h5><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositeSolid" aria-label="Permalink for this Section"></a></div>
                   
                   <table style="width: 100%;"><colgroup style="width: 50%;"></colgroup><colgroup style="width: 50%;"></colgroup><tbody><tr><th scope="col">Supertype relaties</th><th scope="col">Supertype definitie</th></tr><tr><td>
@@ -1523,7 +1582,9 @@ Onderstaande links zijn nu nog naar werkversies</p>
                         
                               <p>Een sequentie van referentiepunten voor een geometrie.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>Veel gemetrische constructen hebben referentiepunten als specificatie. Bijvoorbeeld een lijnstring bestaat uit controlepunten die de lijnsegmenten bepalen.</p>
                            
@@ -1536,7 +1597,9 @@ Onderstaande links zijn nu nog naar werkversies</p>
                         
                               <p>Een homogeen deel (surface patch) van een vlak  gedefinieerd door een set van grenscurves en het vlak waartoe het behoort.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>Een GM<em>Polygon is een GM</em>Surface­Patch.</p>
                            
@@ -1589,7 +1652,9 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         
                               <p>Een sequentie van aaneengesloten lijnsegmenten met het interpolatietype circular arcs.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
                <div class="header-wrapper"><h5 id="overzicht-relaties-3">Overzicht relaties  </h5><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_ArcString" aria-label="Permalink for this Section"></a></div>
                   
                   <table style="width: 100%;"><colgroup style="width: 50%;"></colgroup><colgroup style="width: 50%;"></colgroup><tbody><tr><th scope="col">Supertype relaties</th><th scope="col">Supertype definitie</th></tr><tr><td>
@@ -1610,25 +1675,20 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         
                               <p>Gedeelde eigenschappen van GM<em>Surface en GM</em>Surface­Patch.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Geometry"><div class="header-wrapper"><h4 id="x4-2-8-primitief-datatype-gm_geometry"><bdi class="secno">4.2.8 </bdi>Primitief datatype   GM_Geometry</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Geometry" aria-label="Permalink for Section 4.2.8"></a></div>
-               <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Geometry</td></tr><tr><th scope="row">Herkomst</th><td>
-                        ISO 19107-2003
-                     </td></tr><tr><th scope="row">Definitie</th><td>
-                        
-                              <p>Bestaat niet in 19107-2003</p>
-                           
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
-            </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_CompositeSurface"><div class="header-wrapper"><h4 id="x4-2-9-primitief-datatype-gm_composite-surface"><bdi class="secno">4.2.9 </bdi>Primitief datatype   GM_Composite­Surface</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositeSurface" aria-label="Permalink for Section 4.2.9"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_CompositeSurface"><div class="header-wrapper"><h4 id="x4-2-8-primitief-datatype-gm_composite-surface"><bdi class="secno">4.2.8 </bdi>Primitief datatype   GM_Composite­Surface</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositeSurface" aria-label="Permalink for Section 4.2.8"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Composite­Surface</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een set van aaneengesloten vlakken die samen een vlak vormen en die elkaar niet overlapen.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
                <div class="header-wrapper"><h5 id="overzicht-relaties-4">Overzicht relaties  </h5><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositeSurface" aria-label="Permalink for this Section"></a></div>
                   
                   <table style="width: 100%;"><colgroup style="width: 50%;"></colgroup><colgroup style="width: 50%;"></colgroup><tbody><tr><th scope="col">Supertype relaties</th><th scope="col">Supertype definitie</th></tr><tr><td>
@@ -1642,7 +1702,7 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Solid"><div class="header-wrapper"><h4 id="x4-2-10-primitief-datatype-gm_solid"><bdi class="secno">4.2.10 </bdi>Primitief datatype   GM_Solid</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Solid" aria-label="Permalink for Section 4.2.10"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_Solid"><div class="header-wrapper"><h4 id="x4-2-9-primitief-datatype-gm_solid"><bdi class="secno">4.2.9 </bdi>Primitief datatype   GM_Solid</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Solid" aria-label="Permalink for Section 4.2.9"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Solid</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
@@ -1670,16 +1730,18 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_CompositePoint"><div class="header-wrapper"><h4 id="x4-2-11-primitief-datatype-gm_composite-point"><bdi class="secno">4.2.11 </bdi>Primitief datatype   GM_Composite­Point</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositePoint" aria-label="Permalink for Section 4.2.11"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_CompositePoint"><div class="header-wrapper"><h4 id="x4-2-10-primitief-datatype-gm_composite-point"><bdi class="secno">4.2.10 </bdi>Primitief datatype   GM_Composite­Point</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositePoint" aria-label="Permalink for Section 4.2.10"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Composite­Point</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een GM<em>Complex met één GM</em>Point.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
-                              <p>Deze is opgenomen voor compleetheid. Punten die samen een punt samenstellen zonder te overlappen kan niet. Het ios dus maar één punt.</p>
+                              <p>Deze is opgenomen voor compleetheid. Punten die samen een punt samenstellen zonder te overlappen kan niet. Het is dus maar één punt.</p>
                            
                      </td></tr></tbody></table>
                <div class="header-wrapper"><h5 id="overzicht-relaties-6">Overzicht relaties  </h5><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositePoint" aria-label="Permalink for this Section"></a></div>
@@ -1695,14 +1757,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_MultiPrimitive"><div class="header-wrapper"><h4 id="x4-2-12-primitief-datatype-gm_multi-primitive"><bdi class="secno">4.2.12 </bdi>Primitief datatype   GM_Multi­Primitive</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_MultiPrimitive" aria-label="Permalink for Section 4.2.12"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_MultiPrimitive"><div class="header-wrapper"><h4 id="x4-2-11-primitief-datatype-gm_multi-primitive"><bdi class="secno">4.2.11 </bdi>Primitief datatype   GM_Multi­Primitive</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_MultiPrimitive" aria-label="Permalink for Section 4.2.11"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Multi­Primitive</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Set van geometrische primitieven.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>De set bevat alleen geometrische primitieven en geen complexen.</p>
                            
@@ -1720,14 +1784,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Composite"><div class="header-wrapper"><h4 id="x4-2-13-primitief-datatype-gm_composite"><bdi class="secno">4.2.13 </bdi>Primitief datatype   GM_Composite</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Composite" aria-label="Permalink for Section 4.2.13"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_Composite"><div class="header-wrapper"><h4 id="x4-2-12-primitief-datatype-gm_composite"><bdi class="secno">4.2.12 </bdi>Primitief datatype   GM_Composite</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Composite" aria-label="Permalink for Section 4.2.12"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Composite</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een set van geometrische primitieven die samen geometrieën vormen van een geometrische primitieve en die elkaar niet overlapen.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>Bijvoorbeeld een lijn bestaat uit lijnsegmenten.</p>
                            
@@ -1745,14 +1811,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Aggregate"><div class="header-wrapper"><h4 id="x4-2-14-primitief-datatype-gm_aggregate"><bdi class="secno">4.2.14 </bdi>Primitief datatype   GM_Aggregate</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Aggregate" aria-label="Permalink for Section 4.2.14"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_Aggregate"><div class="header-wrapper"><h4 id="x4-2-13-primitief-datatype-gm_aggregate"><bdi class="secno">4.2.13 </bdi>Primitief datatype   GM_Aggregate</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Aggregate" aria-label="Permalink for Section 4.2.13"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Aggregate</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Arbitraire collectie van geometrieën van elk mogelijk type.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
                <div class="header-wrapper"><h5 id="overzicht-relaties-9">Overzicht relaties  </h5><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Aggregate" aria-label="Permalink for this Section"></a></div>
                   
                   <table style="width: 100%;"><colgroup style="width: 50%;"></colgroup><colgroup style="width: 50%;"></colgroup><tbody><tr><th scope="col">Supertype relaties</th><th scope="col">Supertype definitie</th></tr><tr><td>
@@ -1762,18 +1830,20 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                               <a class="link" href="#global_class_ISO191072003Spatialschema_GM_Object">GM_Object</a>
                            
                         </td><td>
-                           <p>Alle mogelijke geomtrieën in de context van geo-informatie.</p>
+                           <p>Alle mogelijke geometrieën in de context van geo-informatie.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Primitive"><div class="header-wrapper"><h4 id="x4-2-15-primitief-datatype-gm_primitive"><bdi class="secno">4.2.15 </bdi>Primitief datatype   GM_Primitive</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Primitive" aria-label="Permalink for Section 4.2.15"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_Primitive"><div class="header-wrapper"><h4 id="x4-2-14-primitief-datatype-gm_primitive"><bdi class="secno">4.2.14 </bdi>Primitief datatype   GM_Primitive</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Primitive" aria-label="Permalink for Section 4.2.14"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Primitive</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een geometrie die niet verder opgedeeld kan worden in andere primitieven van het model.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>Punt, lijn, vlak of solid.</p>
                            
@@ -1787,18 +1857,20 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                               <a class="link" href="#global_class_ISO191072003Spatialschema_GM_Object">GM_Object</a>
                            
                         </td><td>
-                           <p>Alle mogelijke geomtrieën in de context van geo-informatie.</p>
+                           <p>Alle mogelijke geometrieën in de context van geo-informatie.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_OrientableSurface"><div class="header-wrapper"><h4 id="x4-2-16-primitief-datatype-gm_orientable-surface"><bdi class="secno">4.2.16 </bdi>Primitief datatype   GM_Orientable­Surface</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_OrientableSurface" aria-label="Permalink for Section 4.2.16"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_OrientableSurface"><div class="header-wrapper"><h4 id="x4-2-15-primitief-datatype-gm_orientable-surface"><bdi class="secno">4.2.15 </bdi>Primitief datatype   GM_Orientable­Surface</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_OrientableSurface" aria-label="Permalink for Section 4.2.15"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Orientable­Surface</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een vlak met een oriëntatie, een boven en een onderkant.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>De oriëntatie wordt met + of - aangeduid in relatie tot de oriëntatie van het gerefereerde object.</p>
                            
@@ -1816,7 +1888,7 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_MultiPoint"><div class="header-wrapper"><h4 id="x4-2-17-primitief-datatype-gm_multi-point"><bdi class="secno">4.2.17 </bdi>Primitief datatype   GM_Multi­Point</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_MultiPoint" aria-label="Permalink for Section 4.2.17"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_MultiPoint"><div class="header-wrapper"><h4 id="x4-2-16-primitief-datatype-gm_multi-point"><bdi class="secno">4.2.16 </bdi>Primitief datatype   GM_Multi­Point</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_MultiPoint" aria-label="Permalink for Section 4.2.16"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Multi­Point</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
@@ -1843,14 +1915,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Complex"><div class="header-wrapper"><h4 id="x4-2-18-primitief-datatype-gm_complex"><bdi class="secno">4.2.18 </bdi>Primitief datatype   GM_Complex</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Complex" aria-label="Permalink for Section 4.2.18"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_Complex"><div class="header-wrapper"><h4 id="x4-2-17-primitief-datatype-gm_complex"><bdi class="secno">4.2.17 </bdi>Primitief datatype   GM_Complex</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Complex" aria-label="Permalink for Section 4.2.17"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Complex</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Set van geometrische primitieven die elkaar niet overlappen.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
                <div class="header-wrapper"><h5 id="overzicht-relaties-13">Overzicht relaties  </h5><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Complex" aria-label="Permalink for this Section"></a></div>
                   
                   <table style="width: 100%;"><colgroup style="width: 50%;"></colgroup><colgroup style="width: 50%;"></colgroup><tbody><tr><th scope="col">Supertype relaties</th><th scope="col">Supertype definitie</th></tr><tr><td>
@@ -1860,11 +1934,11 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                               <a class="link" href="#global_class_ISO191072003Spatialschema_GM_Object">GM_Object</a>
                            
                         </td><td>
-                           <p>Alle mogelijke geomtrieën in de context van geo-informatie.</p>
+                           <p>Alle mogelijke geometrieën in de context van geo-informatie.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_MultiCurve"><div class="header-wrapper"><h4 id="x4-2-19-primitief-datatype-gm_multi-curve"><bdi class="secno">4.2.19 </bdi>Primitief datatype   GM_Multi­Curve</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_MultiCurve" aria-label="Permalink for Section 4.2.19"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_MultiCurve"><div class="header-wrapper"><h4 id="x4-2-18-primitief-datatype-gm_multi-curve"><bdi class="secno">4.2.18 </bdi>Primitief datatype   GM_Multi­Curve</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_MultiCurve" aria-label="Permalink for Section 4.2.18"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Multi­Curve</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
@@ -1891,14 +1965,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_LineString"><div class="header-wrapper"><h4 id="x4-2-20-primitief-datatype-gm_line-string"><bdi class="secno">4.2.20 </bdi>Primitief datatype   GM_Line­String</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_LineString" aria-label="Permalink for Section 4.2.20"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_LineString"><div class="header-wrapper"><h4 id="x4-2-19-primitief-datatype-gm_line-string"><bdi class="secno">4.2.19 </bdi>Primitief datatype   GM_Line­String</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_LineString" aria-label="Permalink for Section 4.2.19"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Line­String</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een sequentie van aaneengesloten lijnsegmenten met het interpolatietype lineair.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
                <div class="header-wrapper"><h5 id="overzicht-relaties-15">Overzicht relaties  </h5><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_LineString" aria-label="Permalink for this Section"></a></div>
                   
                   <table style="width: 100%;"><colgroup style="width: 50%;"></colgroup><colgroup style="width: 50%;"></colgroup><tbody><tr><th scope="col">Supertype relaties</th><th scope="col">Supertype definitie</th></tr><tr><td>
@@ -1912,14 +1988,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_SurfacePatch"><div class="header-wrapper"><h4 id="x4-2-21-primitief-datatype-gm_surface-patch"><bdi class="secno">4.2.21 </bdi>Primitief datatype   GM_Surface­Patch</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_SurfacePatch" aria-label="Permalink for Section 4.2.21"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_SurfacePatch"><div class="header-wrapper"><h4 id="x4-2-20-primitief-datatype-gm_surface-patch"><bdi class="secno">4.2.20 </bdi>Primitief datatype   GM_Surface­Patch</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_SurfacePatch" aria-label="Permalink for Section 4.2.20"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Surface­Patch</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een homogeen gedeelte van een GM_Surface (vlak).</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>Een GM<em>Surface patch mag maar tot maximaal één GM</em>Surface behoren.</p>
                            
@@ -1937,14 +2015,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_OrientablePrimitive"><div class="header-wrapper"><h4 id="x4-2-22-primitief-datatype-gm_orientable-primitive"><bdi class="secno">4.2.22 </bdi>Primitief datatype   GM_Orientable­Primitive</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_OrientablePrimitive" aria-label="Permalink for Section 4.2.22"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_OrientablePrimitive"><div class="header-wrapper"><h4 id="x4-2-21-primitief-datatype-gm_orientable-primitive"><bdi class="secno">4.2.21 </bdi>Primitief datatype   GM_Orientable­Primitive</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_OrientablePrimitive" aria-label="Permalink for Section 4.2.21"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Orientable­Primitive</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een geometrische primitieve met een oriëntatie.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>De oriëntatie wordt met + of - aangeduid in relatie tot de oriëntatie van het gerefereerde object.</p>
                            
@@ -1962,14 +2042,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_OrientableCurve"><div class="header-wrapper"><h4 id="x4-2-23-primitief-datatype-gm_orientable-curve"><bdi class="secno">4.2.23 </bdi>Primitief datatype   GM_Orientable­Curve</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_OrientableCurve" aria-label="Permalink for Section 4.2.23"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_OrientableCurve"><div class="header-wrapper"><h4 id="x4-2-22-primitief-datatype-gm_orientable-curve"><bdi class="secno">4.2.22 </bdi>Primitief datatype   GM_Orientable­Curve</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_OrientableCurve" aria-label="Permalink for Section 4.2.22"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Orientable­Curve</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een lijn met een oriëntatie, een richting.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>De oriëntatie wordt met + of - aangeduid in relatie tot de oriëntatie van het gerefereerde object.</p>
                            
@@ -1987,7 +2069,7 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Point"><div class="header-wrapper"><h4 id="x4-2-24-primitief-datatype-gm_point"><bdi class="secno">4.2.24 </bdi>Primitief datatype   GM_Point</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Point" aria-label="Permalink for Section 4.2.24"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_Point"><div class="header-wrapper"><h4 id="x4-2-23-primitief-datatype-gm_point"><bdi class="secno">4.2.23 </bdi>Primitief datatype   GM_Point</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Point" aria-label="Permalink for Section 4.2.23"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Point</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
@@ -2014,14 +2096,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_CurveSegment"><div class="header-wrapper"><h4 id="x4-2-25-primitief-datatype-gm_curve-segment"><bdi class="secno">4.2.25 </bdi>Primitief datatype   GM_Curve­Segment</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CurveSegment" aria-label="Permalink for Section 4.2.25"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_CurveSegment"><div class="header-wrapper"><h4 id="x4-2-24-primitief-datatype-gm_curve-segment"><bdi class="secno">4.2.24 </bdi>Primitief datatype   GM_Curve­Segment</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CurveSegment" aria-label="Permalink for Section 4.2.24"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Curve­Segment</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een homogeen segment van een GM_Curve (lijn).</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
                <div class="header-wrapper"><h5 id="overzicht-relaties-20">Overzicht relaties  </h5><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CurveSegment" aria-label="Permalink for this Section"></a></div>
                   
                   <table style="width: 100%;"><colgroup style="width: 50%;"></colgroup><colgroup style="width: 50%;"></colgroup><tbody><tr><th scope="col">Supertype relaties</th><th scope="col">Supertype definitie</th></tr><tr><td>
@@ -2035,23 +2119,27 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Position"><div class="header-wrapper"><h4 id="x4-2-26-primitief-datatype-gm_position"><bdi class="secno">4.2.26 </bdi>Primitief datatype   GM_Position</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Position" aria-label="Permalink for Section 4.2.26"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_Position"><div class="header-wrapper"><h4 id="x4-2-25-primitief-datatype-gm_position"><bdi class="secno">4.2.25 </bdi>Primitief datatype   GM_Position</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Position" aria-label="Permalink for Section 4.2.25"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Position</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een keuze tussen een directe positie door middel van coordinaten in een coordinaat referentie systeem en indirecte positie door referentie aan een punt. </p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Surface"><div class="header-wrapper"><h4 id="x4-2-27-primitief-datatype-gm_surface"><bdi class="secno">4.2.27 </bdi>Primitief datatype   GM_Surface</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Surface" aria-label="Permalink for Section 4.2.27"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_Surface"><div class="header-wrapper"><h4 id="x4-2-26-primitief-datatype-gm_surface"><bdi class="secno">4.2.26 </bdi>Primitief datatype   GM_Surface</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Surface" aria-label="Permalink for Section 4.2.26"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Surface</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Vlak. 2-dimensionale geometrie.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr><tr><th scope="row">Toelichting</th><td>
                         
                               <p>Een vlak heeft een oriëntatie, dat wil zeggen, een boven en onderzijde. De bovenzijde is gedefinieerd als de kant vanaf welke de begrenzing tegen de klok in (anti clock wise) is gedigitaliseerd. Een vlak bestaat uit een of meer ‘surface patches’. Indien er meerdere zijn dan vormen die samen een aaneengesloten vlak.</p>
                               <p>Een vlak is simple indien een vlak bestaat uit één surface patch.</p>
@@ -2072,14 +2160,16 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_CompositeCurve"><div class="header-wrapper"><h4 id="x4-2-28-primitief-datatype-gm_composite-curve"><bdi class="secno">4.2.28 </bdi>Primitief datatype   GM_Composite­Curve</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositeCurve" aria-label="Permalink for Section 4.2.28"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_CompositeCurve"><div class="header-wrapper"><h4 id="x4-2-27-primitief-datatype-gm_composite-curve"><bdi class="secno">4.2.27 </bdi>Primitief datatype   GM_Composite­Curve</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositeCurve" aria-label="Permalink for Section 4.2.27"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Composite­Curve</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
                               <p>Een set van aaneengesloten lijnen die samen een lijn vormen en die elkaar niet overlapen.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
                <div class="header-wrapper"><h5 id="overzicht-relaties-22">Overzicht relaties  </h5><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_CompositeCurve" aria-label="Permalink for this Section"></a></div>
                   
                   <table style="width: 100%;"><colgroup style="width: 50%;"></colgroup><colgroup style="width: 50%;"></colgroup><tbody><tr><th scope="col">Supertype relaties</th><th scope="col">Supertype definitie</th></tr><tr><td>
@@ -2093,7 +2183,7 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_MultiSolid"><div class="header-wrapper"><h4 id="x4-2-29-primitief-datatype-gm_multi-solid"><bdi class="secno">4.2.29 </bdi>Primitief datatype   GM_Multi­Solid</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_MultiSolid" aria-label="Permalink for Section 4.2.29"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_MultiSolid"><div class="header-wrapper"><h4 id="x4-2-28-primitief-datatype-gm_multi-solid"><bdi class="secno">4.2.28 </bdi>Primitief datatype   GM_Multi­Solid</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_MultiSolid" aria-label="Permalink for Section 4.2.28"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Multi­Solid</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
@@ -2120,41 +2210,29 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
                         </td></tr></tbody></table>
                
             </section>
-            <section id="global_class_ISO191072003Spatialschema_GM_Object"><div class="header-wrapper"><h4 id="x4-2-30-primitief-datatype-gm_object"><bdi class="secno">4.2.30 </bdi>Primitief datatype   GM_Object</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Object" aria-label="Permalink for Section 4.2.30"></a></div>
+            <section id="global_class_ISO191072003Spatialschema_GM_Object"><div class="header-wrapper"><h4 id="x4-2-29-primitief-datatype-gm_object"><bdi class="secno">4.2.29 </bdi>Primitief datatype   GM_Object</h4><a class="self-link" href="#global_class_ISO191072003Spatialschema_GM_Object" aria-label="Permalink for Section 4.2.29"></a></div>
                <table style="width: 100%;" class="overview OVERVIEW-PRIMITIVEDATATYPE"><colgroup style="width: 30%;"></colgroup><colgroup style="width: 70%;"></colgroup><tbody><tr><th scope="row">Naam</th><td>GM_Object</td></tr><tr><th scope="row">Herkomst</th><td>
                         ISO 19107-2003
                      </td></tr><tr><th scope="row">Definitie</th><td>
                         
-                              <p>Alle mogelijke geomtrieën in de context van geo-informatie.</p>
+                              <p>Alle mogelijke geometrieën in de context van geo-informatie.</p>
                            
-                     </td></tr><tr><th scope="row">Herkomst definitie</th><td> </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
+                     </td></tr><tr><th scope="row">Herkomst definitie</th><td>
+                        ISO 19107 datatypen, Geonovum Handreiking
+                     </td></tr><tr><th scope="row">Datum opname</th><td> </td></tr></tbody></table>
             </section>
          </section></section>
 
 
-<section id="conformance"><div class="header-wrapper"><h2 id="x5-conformiteit"><bdi class="secno">5. </bdi>Conformiteit</h2><a class="self-link" href="#conformance" aria-label="Permalink for Section 5."></a></div><p>Naast onderdelen die als niet-normatief gemarkeerd zijn, zijn ook alle diagrammen, voorbeelden, en noten in dit document niet-normatief. Verder is alles in dit document normatief.</p>
-<section id="tof">
-<section id="index" class="appendix"><div class="header-wrapper"><h4 id="index-0">Index</h4><a class="self-link" href="#index" aria-label="Permalink for this Appendix"></a></div>
+ 
 
 
 
 
-<section id="index-defined-here">
-    <div class="header-wrapper"><h5 id="termen-gedefinieerd-door-deze-specificatie">Termen gedefinieerd door deze specificatie</h5><a class="self-link" href="#index-defined-here" aria-label="Permalink for this Appendix"></a></div>
-    <ul class="index">
-    
-  </ul>
-  </section><section id="index-defined-elsewhere">
-    <div class="header-wrapper"><h5 id="termen-gedefinieerd-door-verwijzing">Termen gedefinieerd door verwijzing</h5><a class="self-link" href="#index-defined-elsewhere" aria-label="Permalink for this Appendix"></a></div>
-    <ul class="index">
-    
-  </ul>
-  </section></section><h1>Lijst met figuren</h1><ul class="tof">
-        <li class="tofline">
-    <a class="tocxref" href="#fig-diagram-iso-19107-2003-spatial-schema-basismodel"><span class="self-link">Figuur <bdi class="figno">1</bdi></span> <span class="fig-title"> ‒ Diagram: ISO 19107:2003 Spatial schema: basismodel</span></a>
-  </li>
-      </ul></section></section><section id="references" class="appendix"><div class="header-wrapper"><h2 id="a-referenties"><bdi class="secno">A. </bdi>Referenties</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix A."></a></div><section id="normatieve-referenties">
-    <div class="header-wrapper"><h3 id="a-1-normatieve-referenties"><bdi class="secno">A.1 </bdi>Normatieve referenties</h3><a class="self-link" href="#normatieve-referenties" aria-label="Permalink for Appendix A.1"></a></div>
+
+
+<section id="references" class="appendix"><div class="header-wrapper"><h2 id="a-referenties"><bdi class="secno">A. </bdi>Referenties</h2><a class="self-link" href="#references" aria-label="Permalink for Appendix A."></a></div><section id="informatieve-referenties">
+    <div class="header-wrapper"><h3 id="a-1-informatieve-referenties"><bdi class="secno">A.1 </bdi>Informatieve referenties</h3><a class="self-link" href="#informatieve-referenties" aria-label="Permalink for Appendix A.1"></a></div>
     <dl class="bibliography"><dt id="bib-iso19107">[ISO19107]</dt><dd>
       <a href="https://www.iso.org/standard/66175.html"><cite>ISO 19107:2019 Geographic information — Spatial schema</cite></a>.  ISO. 2019-12-01. Published. URL: <a href="https://www.iso.org/standard/66175.html">https://www.iso.org/standard/66175.html</a>
     </dd><dt id="bib-nl-sbb-20241010">[NL-SBB-20241010]</dt><dd>
@@ -2177,8 +2255,11 @@ function setupPanel() {
 }
 
 function panelListener() {
-  /** @type {HTMLElement} */
+  /** @type {HTMLElement | null} */
   let panel = null;
+  /**
+   * @param {KeyboardEvent|MouseEvent} event
+   */
   return event => {
     const { target, type } = event;
 
@@ -2186,24 +2267,34 @@ function panelListener() {
 
     // For keys, we only care about Enter key to activate the panel
     // otherwise it's activated via a click.
-    if (type === "keydown" && event.key !== "Enter") return;
+    if (
+      type === "keydown" &&
+      /** @type {KeyboardEvent} */ (event).key !== "Enter"
+    )
+      return;
 
     const action = deriveAction(event);
 
     switch (action) {
       case "show": {
         hidePanel(panel);
-        /** @type {HTMLElement} */
+        /** @type {HTMLElement | null} */
         const dfn = target.closest("dfn, .index-term");
+        if (!dfn?.id) break;
         panel = document.getElementById(`dfn-panel-for-${dfn.id}`);
-        const coords = deriveCoordinates(event);
+        if (!panel) break;
+        const coords = deriveCoordinates(
+          /** @type {MouseEvent|KeyboardEvent} */ (event)
+        );
         displayPanel(dfn, panel, coords);
         break;
       }
       case "dock": {
-        panel.style.left = null;
-        panel.style.top = null;
-        panel.classList.add("docked");
+        if (panel) {
+          panel.style.left = "";
+          panel.style.top = "";
+          panel.classList.add("docked");
+        }
         break;
       }
       case "hide": {
@@ -2254,7 +2345,8 @@ function deriveAction(event) {
     if (hitALink) {
       return target.classList.contains("self-link") ? "hide" : "dock";
     }
-    const panel = target.closest(".dfn-panel");
+
+    const panel = /** @type {HTMLElement} */ (target.closest(".dfn-panel"));
     return panel.classList.contains("docked") ? "hide" : "none";
   }
   if (document.querySelector(".dfn-panel:not([hidden])")) {
@@ -2298,9 +2390,9 @@ function displayPanel(dfn, panel, { x, y }) {
     const newLeft = Math.max(MARGIN, x + MARGIN - panelRect.width);
     const newCaretOffset = left - newLeft;
     panel.style.left = `${newLeft}px`;
-    /** @type {HTMLElement} */
+    /** @type {HTMLElement | null} */
     const caret = panel.querySelector(".caret");
-    caret.style.left = `${newCaretOffset}px`;
+    if (caret) caret.style.left = `${newCaretOffset}px`;
   }
 
   // As it's a dialog, we trap focus.
@@ -2349,6 +2441,9 @@ function trapFocus(panel, dfn) {
 function createTrapListener(anchors, panel, dfn) {
   const lastIndex = anchors.length - 1;
   let currentIndex = 0;
+  /**
+   * @param {KeyboardEvent} event
+   */
   return event => {
     switch (event.key) {
       // Hitting "Tab" traps us in a nice loop around elements.
@@ -2378,7 +2473,7 @@ function createTrapListener(anchors, panel, dfn) {
   };
 }
 
-/** @param {HTMLElement} panel */
+/** @param {HTMLElement | null} panel */
 function hidePanel(panel) {
   if (!panel) return;
   panel.hidden = true;
