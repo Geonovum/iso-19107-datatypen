@@ -10,11 +10,11 @@ Een groepering van primitieve datatypen is naar onderdelen van de basisstandaard
 > Onderstaande links zijn nu nog naar werkversies
 >
 
-- [Metamodel voor Informatiemodellering (MIM)](https://geonovum.github.io/mim-datatypen/);
+- [MIM - Metamodel voor Informatiemodellering](https://geonovum.github.io/mim-datatypen/);
 
 - Geometrische primitieven conform het geometriemodel van ISO 19107 (deze handreiking);
 
 - [Geonovum datatypen](https://geonovum.github.io/geonovum-datatypen/). Overige primitieven die niet in bovenstaande groepen vallen.
 
 
-Dit informatiemodel is conform MIM 1.2 weergegeven en bevat een begrippenmodel conform [[NL-SBB-20241010]].
+Dit informatiemodel is conform MIM 1.2 \[\[MIM12]] weergegeven en bevat een begrippenmodel conform [[NL-SBB-20241010]].
