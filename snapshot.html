@@ -1379,6 +1379,11 @@ body:has(input[name=color-scheme][value=dark]:checked) .hljs{
   "publishVersion": [],
   "editors": [
     {
+      "name": "Paul Janssen",
+      "company": "Geonovum",
+      "companyURL": "https://www.geonovum.nl"
+    },
+    {
       "name": "Wilko Quak",
       "company": "Geonovum",
       "companyURL": "https://www.geonovum.nl"
@@ -1407,7 +1412,7 @@ body:has(input[name=color-scheme][value=dark]:checked) .hljs{
     <h2>
       Geonovum Handreiking<br>
       Document
-      <time class="dt-published" datetime="2026-06-30">30 juni 2026</time>
+      <time class="dt-published" datetime="2026-07-06">06 juli 2026</time>
     </h2>
     <dl>
       
@@ -1418,8 +1423,10 @@ body:has(input[name=color-scheme][value=dark]:checked) .hljs{
       
       
       
-      <dt>Redacteur:</dt>
+      <dt>Redacteurs:</dt>
       <dd class="editor p-author h-card vcard">
+    <span class="p-name fn">Paul Janssen</span> (<a class="p-org org h-org" href="https://www.geonovum.nl">Geonovum</a>)
+  </dd><dd class="editor p-author h-card vcard">
     <span class="p-name fn">Wilko Quak</span> (<a class="p-org org h-org" href="https://www.geonovum.nl">Geonovum</a>)
   </dd>
       
@@ -1464,35 +1471,35 @@ body:has(input[name=color-scheme][value=dark]:checked) .hljs{
 Onderstaande links zijn nu nog naar werkversies</p>
 </blockquote>
 <ul>
-<li><p><a href="https://geonovum.github.io/mim-datatypen/">Metamodel voor Informatiemodellering (MIM)</a>;</p>
+<li><p><a href="https://geonovum.github.io/mim-datatypen/">MIM - Metamodel voor Informatiemodellering</a>;</p>
 </li>
 <li><p>Geometrische primitieven conform het geometriemodel van ISO 19107 (deze handreiking);</p>
 </li>
 <li><p><a href="https://geonovum.github.io/geonovum-datatypen/">Geonovum datatypen</a>. Overige primitieven die niet in bovenstaande groepen vallen.</p>
 </li>
 </ul>
-<p>Dit informatiemodel is conform MIM 1.2 weergegeven en bevat een begrippenmodel conform [<cite><a class="bibref" data-link-type="biblio" href="#bib-nl-sbb-20241010" title="NNL-SBB - Standaard voor het beschrijven van begrippen">NL-SBB-20241010</a></cite>].</p>
+<p>Dit informatiemodel is conform MIM 1.2 [<cite><a class="bibref" data-link-type="biblio" href="#bib-mim12" title="MIM - Metamodel Informatie Modellering (Versie 1.2)">MIM12</a></cite>] weergegeven en bevat een begrippenmodel conform [<cite><a class="bibref" data-link-type="biblio" href="#bib-nl-sbb-20241010" title="NNL-SBB - Standaard voor het beschrijven van begrippen">NL-SBB-20241010</a></cite>].</p>
 </section>
 <section id="toepassingsgebied"><div class="header-wrapper"><h2 id="x2-toepassingsgebied"><bdi class="secno">2. </bdi>Toepassingsgebied</h2><a class="self-link" href="#toepassingsgebied" aria-label="Permalink for Section 2."></a></div>
 <p>Deze serie aan handreikingen over primitieve datatypen definieren of relateren de standaard datatypen die gebruikt worden in door Geonovum gemaakte informatiemodellen. Deze datatypen worden over het algemeen in andere standaarden gedefineerd maar zijn voor overzicht en volledigheid in deze handreiking opgenomen. De datatypen omvatten zogenaamde primitieven. Dit zijn atomaire datatypen die niet verder meer beschreven kunnen worden in termen van andere datatypen. Primitieve datatypen zijn bijna altijd waardetypen. Een gespecificeerd datatype bevat een naam (term) een definitie en optioneel een toelichting. Indien er een samenhang is tussen datatypen, dan is die ook opgenomen.</p>
-<p>Deze handreiking behandelt de geometrische datatypen zoals die in de ISO 19109 Geographic Information - Spatial schema ([<cite><a class="bibref" data-link-type="biblio" href="#bib-iso19107" title="ISO 19107:2019 Geographic information — Spatial schema">ISO19107</a></cite>]) zijn beschreven.</p>
+<p>Deze handreiking behandelt de geometrische datatypen zoals die in de ISO 19109 Geographic Information - Spatial schema [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso19107" title="ISO 19107:2019 Geographic information — Spatial schema">ISO19107</a></cite>] zijn beschreven.</p>
 </section>
 <section id="informele-beschrijving"><div class="header-wrapper"><h2 id="x3-informele-beschrijving"><bdi class="secno">3. </bdi>Informele beschrijving</h2><a class="self-link" href="#informele-beschrijving" aria-label="Permalink for Section 3."></a></div>
 <p>Informatiemodellen bevatten voor het specificeren van waardetypen van attributen onder andere referenties naar zogenaamde primitieve datatypen. Voorbeelden hiervan zijn: 'CharacterString', 'Integer', 'Date', 'GM_Point', 'Boolean'.</p>
-<p>Een primitief datatype wordt primitief genoemd omdat het atomair is dat wil zeggen dat het binnen de context van een informatiemodel niet verder opgesplits kan worden in kleinere datatypes. Deze primitieve datatypen zijn buiten een informatiemodel gespecificeerd. Meestal in internationale standaarden. Implementaties in een digitale omgeving en implementatie formaten maken dan gebruik van deze internationaal geldende specificaties.</p>
+<p>Een primitief datatype wordt primitief genoemd omdat het atomair is dat wil zeggen dat het binnen de context van een informatiemodel niet verder opgesplitst kan worden in kleinere datatypes. Deze primitieve datatypen zijn buiten een informatiemodel gespecificeerd. Meestal in internationale standaarden. Implementaties in een digitale omgeving en implementatie formaten maken dan gebruik van deze internationaal geldende specificaties. ISO/IEC 11404 Information technology - General-Purpose-Datatypes (GPD) beschrijft een primitief datatype als een datatype waarvan de waarderuimte is gespecificeerd door een axioma of door een enumeratie.</p>
 <p>Meestal zijn primitieve datatypen enkelvoudig, het kan echter voorkomen dat een primitief datatype een structuur heeft en dus tevens een complex datatype is.</p>
 <p>Primitieve datatype worden meestal alleen gebruikt voor het specificeren van waardetypen.</p>
 <p>Voor Geonovum willen we afpraken maken over het gebruik van primitieve datatypen, welke het zijn, en wat hun definitie is. We doen dit in de vorm van een handreiking omdat we dit relateren aan internationale standaarden. Deze handreikingen plaatsen die datatypen in de context van de informatiemodellering van Geonovum.</p>
 <p>Er wordt een opdeling gemaakt op basis van een aantal onderdelen van het raamwerk van Geostandaarden: de MIM standaard, het ISO 19107 geometrie model en een derde groep 'overig':</p>
 <ul>
-<li><p><a href="https://geonovum.github.io/mim-datatypen/">Metamodel voor Informatiemodellering (MIM)</a>;</p>
+<li><p><a href="https://geonovum.github.io/mim-datatypen/">MIM - Metamodel voor Informatiemodellering</a>;</p>
 </li>
 <li><p>Geometrische primitieven conform het geometriemodel van ISO 19107 (deze handreiking);</p>
 </li>
 <li><p><a href="https://geonovum.github.io/geonovum-datatypen/">Geonovum datatypen</a>. Overige primitieven die niet in bovenstaande groepen vallen.</p>
 </li>
 </ul>
-<p>In deze handreikingen worden de primitieve datatypen in een MIM 1.2 conform conceptueel informatiemodel gespecificeerd. Tevens wordt er een [<cite><a class="bibref" data-link-type="biblio" href="#bib-nl-sbb-20241010" title="NNL-SBB - Standaard voor het beschrijven van begrippen">NL-SBB-20241010</a></cite>] conform begrippenmodel gepubliceerd.</p>
+<p>In deze handreikingen worden de primitieve datatypen in een MIM 1.2 [<cite><a class="bibref" data-link-type="biblio" href="#bib-mim12" title="MIM - Metamodel Informatie Modellering (Versie 1.2)">MIM12</a></cite>] conform conceptueel informatiemodel gespecificeerd. Tevens wordt er een [<cite><a class="bibref" data-link-type="biblio" href="#bib-nl-sbb-20241010" title="NNL-SBB - Standaard voor het beschrijven van begrippen">NL-SBB-20241010</a></cite>] conform begrippenmodel gepubliceerd.</p>
 <section id="iso-19107-geographic-information-spatial-schema"><div class="header-wrapper"><h3 id="x3-1-iso-19107-geographic-information-spatial-schema"><bdi class="secno">3.1 </bdi>ISO 19107 Geographic Information - Spatial schema.</h3><a class="self-link" href="#iso-19107-geographic-information-spatial-schema" aria-label="Permalink for Section 3.1"></a></div>
 <p>De ISO standaard Geographic Information - Spatial schema [<cite><a class="bibref" data-link-type="biblio" href="#bib-iso19107" title="ISO 19107:2019 Geographic information — Spatial schema">ISO19107</a></cite>] beschrijft het conceptuele model van geometrieën. Voorbeelden hiervan zijn punt, lijn, vlak, 3D volumes en ook combinaties hiervan. Onderdeel van de specificaties is onder andere ook de wis- en meetkundige definities hiervan, oriëntatie in relatie tot onder- en bovenkant, richting van coördinaatreeksen. Al deze specificaties zijn nodig om een eenduidig begrip te hebben en interoperable implementaties te krijgen in technische formaten. Deze handreiking gaat niet tot dat detail maar bevat slechts het overzicht van de geometrietypen en een aantal van de onderlinge relaties en is daarmee een referentie naar de ISO standaard. In de ISO 19107 zijn voor de geomtrietypen geen talige definities opgenomen maar in veel gevallen wel een beschrijving. In deze handreiking is van die omschrijvingen een definitie gemaakt. Deze moet geplaatst worden in de context van de ISO 19107.</p>
 <pre><code aria-busy="false" class="hljs yaml"><span class="hljs-string">Een</span> <span class="hljs-string">voorbeeld</span>
@@ -2242,6 +2249,8 @@ Zie verder: https://docs.geostandaarden.nl/nen3610/gimeg/#gm_multisurface.</p>
     <div class="header-wrapper"><h3 id="a-1-informatieve-referenties"><bdi class="secno">A.1 </bdi>Informatieve referenties</h3><a class="self-link" href="#informatieve-referenties" aria-label="Permalink for Appendix A.1"></a></div>
     <dl class="bibliography"><dt id="bib-iso19107">[ISO19107]</dt><dd>
       <a href="https://www.iso.org/standard/66175.html"><cite>ISO 19107:2019 Geographic information — Spatial schema</cite></a>.  ISO. 2019-12-01. Published. URL: <a href="https://www.iso.org/standard/66175.html">https://www.iso.org/standard/66175.html</a>
+    </dd><dt id="bib-mim12">[MIM12]</dt><dd>
+      <a href="https://docs.geostandaarden.nl/mim/def-st-mim-20240613/"><cite>MIM - Metamodel Informatie Modellering (Versie 1.2)</cite></a>.  Geonovum. 2024-06-13. Definitief. URL: <a href="https://docs.geostandaarden.nl/mim/def-st-mim-20240613/">https://docs.geostandaarden.nl/mim/def-st-mim-20240613/</a>
     </dd><dt id="bib-nl-sbb-20241010">[NL-SBB-20241010]</dt><dd>
       <a href="https://docs.geostandaarden.nl/nl-sbb/def-st-nl-sbb-20241010/"><cite>NNL-SBB - Standaard voor het beschrijven van begrippen</cite></a>.  Geonovum. 2024-10-10. Vastgestelde versie. URL: <a href="https://docs.geostandaarden.nl/nl-sbb/def-st-nl-sbb-20241010/">https://docs.geostandaarden.nl/nl-sbb/def-st-nl-sbb-20241010/</a>
     </dd></dl>
