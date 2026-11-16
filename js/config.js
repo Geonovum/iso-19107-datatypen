@@ -9,22 +9,13 @@ let respecConfig = {
   //specStatus: "cv",               // Consultatieversie
   //specStatus: "vv",               // Versie ter vaststelling
   //specStatus: "def",              // Vastgestelde versie
-  specStatus: "basis",            // Basis Document
+  specStatus: "ld",            	// Levend document
 
   //-- specType is verplicht bij alle andere dan BASIS
-  //specType: "NO",                 // Norm
-  //specType: "ST",                 // Standaard
-  //specType: "IM",                 // Informatie Model
-  //specType: "PR",                 // Praktijkrichtlijn
   specType: "HR",                   // HandReiking
-  //specType: "WA",                 // Werkafspraak
-  //specType: "BD",                 // Beheer Documentatie
-  //specType: "AL",                 // Algemeen document
-  //specType: "BP",                 // Best Practice
 
   //-- pubDomain is verplicht! (komt in de URL)
   //-- zie: https://geonovum.github.io/handleiding-tooling/ReSpec/#pubdomain
-  //-- TODO: vul pubDomain in
   pubDomain: "iso",
 
   //-- license: voor de geldende gebruiksvoorwaarden. Default is cc-by.
